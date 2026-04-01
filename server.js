@@ -90,7 +90,7 @@ const server = http.createServer((req, res) => {
   let filePath = req.url === "/" ? "/cio-dashboard.html" : req.url;
   filePath = path.join(__dirname, filePath);
   const ext = path.extname(filePath);
-  const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css" }[ext] || "application/octet-stream";
+  const mime = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".jpg": "image/jpeg", ".svg": "image/svg+xml", ".json": "application/json" }[ext] || "application/octet-stream";
 
   fs.readFile(filePath, (err, data) => {
     if (err) {
