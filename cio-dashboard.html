@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chief Innovation Officer — Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0A0A0C;
+  --surface: #111114;
+  --surface2: #18181C;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #F0EEE8;
+  --muted: rgba(240,238,232,0.4);
+  --faint: rgba(240,238,232,0.15);
+  --accent-a: #4FC8A0;
+  --accent-b: #A78BFA;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+}
+
+/* TOP BAR */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 2rem;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--surface);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-a);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.topbar-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 400;
+}
+
+.topbar-right {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+/* MAIN */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  gap: 2rem;
+}
+
+.period-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-align: center;
+}
+
+/* CARDS */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--border2);
+  border-radius: 16px;
+  padding: 2rem 2rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.6;
+}
+
+.card-a { --accent: var(--accent-a); }
+.card-b { --accent: var(--accent-b); }
+
+.card-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.25rem;
+}
+
+.card-number {
+  font-family: var(--mono);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  min-height: 56px;
+}
+
+.card-a .card-number { color: var(--accent-a); }
+.card-b .card-number { color: var(--accent-b); }
+
+/* SPARKLINE */
+.sparkline-wrap {
+  height: 32px;
+  margin-bottom: 1.25rem;
+}
+
+svg.spark { width: 100%; height: 32px; overflow: visible; }
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.5px solid var(--border);
+  padding-top: 1rem;
+}
+
+.card-since {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 0.1em;
+}
+
+.card-rate {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.card-a .card-rate { color: var(--accent-a); }
+.card-b .card-rate { color: var(--accent-b); }
+
+/* FOOTER */
+footer {
+  border-top: 0.5px solid var(--border);
+  padding: 1rem 2rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--faint);
+  letter-spacing: 0.12em;
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="status-dot"></div>
+    <span class="topbar-title">Chief Innovation Officer — Command Center</span>
+  </div>
+  <span class="topbar-right" id="clock"></span>
+</div>
+
+<main>
+  <div class="period-label">Key Performance Indicators</div>
+
+  <div class="cards">
+
+    <div class="card card-b">
+      <div class="card-label">Total mentions: innovation, bluesky, protocol, decentralization, attie, atproto</div>
+      <div class="card-number" id="innovation-count">—</div>
+      <div class="card-footer">
+        <span class="card-since">Since —</span>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>Live from the Bluesky firehose. All metrics are extremely real.</footer>
+
+<script>
+let innovation = 0;
+let sinceLabel = '';
+
+function fmt(n) {
+  return Math.round(n).toLocaleString('en-US');
+}
+
+function render() {
+  document.getElementById('innovation-count').textContent = fmt(innovation);
+  if (sinceLabel) {
+    document.querySelector('.card-since').textContent = 'Since ' + sinceLabel;
+  }
+}
+
+async function fetchCount() {
+  try {
+    const res = await fetch('/api/count');
+    const data = await res.json();
+    innovation = data.count;
+    sinceLabel = new Date(data.since).toLocaleDateString('en-US', {
+      month: 'short', day: 'numeric', year: 'numeric'
+    });
+    render();
+  } catch {
+    // keep showing last known value
+  }
+}
+
+// Clock
+function updateClock() {
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  document.getElementById('clock').textContent =
+    `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} UTC`;
+}
+
+fetchCount();
+updateClock();
+setInterval(fetchCount, 2000);
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
